@@ -15,6 +15,10 @@ Esta aplicación permite consultar datos de usuarios y streams en vivo desde la 
 
 ---
 
+## Entorno
+
+- Crear un .env con las variables TWITCH_CLIENT_ID y TWITCH_CLIENT_SECRET para acceder a la API externa de Twitch
+
 ## ⚙️ Endpoints
 
 ### `/analytics/user?id=<twitch_user_id>`

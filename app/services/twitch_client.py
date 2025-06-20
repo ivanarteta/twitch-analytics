@@ -36,7 +36,6 @@ async def get_token():
 
 async def get_user_info(id):
     token = await get_token()
-    print(token)
 
     headers = {
         "Authorization": f"Bearer {token}",
@@ -56,4 +55,20 @@ async def get_user_info(id):
     return response.json().get("data", [])[0]
 
 async def get_live_streams():
-    return None
+    token = await get_token()
+
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Client-Id": CLIENT_ID
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(f"{BASE_URL}/streams", headers=headers)
+
+    if response.status_code == 401:
+        raise_http_error(401, "Unauthorized. Twitch access token is invalid or has expired.")
+    elif response.status_code == 500:
+        raise_http_error(500, "Internal server error")  
+
+    streams = response.json().get("data", [])
+    return [{"title": stream["title"], "user_name": stream["user_name"]} for stream in streams]

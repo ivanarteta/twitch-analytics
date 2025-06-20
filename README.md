@@ -18,16 +18,12 @@ Esta aplicación permite consultar datos de usuarios y streams en vivo desde la 
 
 - Tener Docker y Docker Compose instalados (recomendado: Docker Desktop).
 - En Windows, usar Git Bash o WSL si se desea trabajar con `make`.
-- Tener un archivo `.env` con las siguientes claves:
-
-```env
-TWITCH_CLIENT_ID=tu_client_id
-TWITCH_CLIENT_SECRET=tu_client_secret
+- Tener un archivo `.env` con las siguientes claves: TWITCH_CLIENT_ID=tu_client_id y TWITCH_CLIENT_SECRET=tu_client_secret
 
 ## Ejecución de la aplicación
 
 - Crear un .env con las variables TWITCH_CLIENT_ID y TWITCH_CLIENT_SECRET para acceder a la API externa de Twitch
-- En terminal de Linux de Windows o terminal de sistema Linux/Mac con make instalado (sudo apt update && sudo apt install make). En la raíz del proyecto, ejecutar make dcup, en caso de no tener make, ejecutar docker compose up -d
+- En la raíz del proyecto, ejecutar make dcup, en caso de no tener make, ejecutar docker compose up -d
 - Una vez se hace la build del contenedor (solo la primera vez) y se levanta, acceder en el navegador a localhost:8000/docs para acceder a la documentación de la API
 - Probar los endpoints.
 

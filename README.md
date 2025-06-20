@@ -48,10 +48,10 @@ Esta aplicación permite consultar datos de usuarios y streams en vivo desde la 
 
 ## 🧠 Proceso de desarrollo
 
-1º Lectura de requerimientos y selección del lenguaje y tecnologías a utilizar
-2º Montaje del esqueleto del proyecto y arquitectura Docker
-3º Lectura de la documentación de la API de twitch para saber sus estructuras de respuesta y peticiones
-4º Desarrollo de la petición para obtener el token de twitch para posteriores peticiones
-5º Desarrollo del endpoint para recoger datos de un usuario de twitch por id con manejo de errores
-6º Desarrollo del endpoint para recoger datos de los directos en ese momento con manejo de errores
-7º Desarrollo del regenerar token en el caso de que la perimera vez sea inválido y refactorización del código
+- Lectura de requerimientos y selección del lenguaje y tecnologías a utilizar
+- Montaje del esqueleto del proyecto y arquitectura Docker
+- Lectura de la documentación de la API de twitch para saber sus estructuras de respuesta y peticiones
+- Desarrollo de la petición para obtener el token de twitch para posteriores peticiones
+- Desarrollo del endpoint para recoger datos de un usuario de twitch por id con manejo de errores
+- Desarrollo del endpoint para recoger datos de los directos en ese momento con manejo de errores
+- Desarrollo del regenerar token en el caso de que la perimera vez sea inválido y refactorización del código

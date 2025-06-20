@@ -3,7 +3,6 @@ from app.services.twitch_client import get_user_info, get_live_streams
 
 router = APIRouter()
 
-
 @router.get("/user")
 async def get_user(id: str = Query(..., description="Twitch user ID")):
     if not id or not id.strip():

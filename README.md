@@ -10,14 +10,26 @@ Esta aplicación permite consultar datos de usuarios y streams en vivo desde la 
 - [Uvicorn](https://www.uvicorn.org/) – Servidor ASGI para FastAPI
 - [Docker](https://www.docker.com/) y [Docker Compose](https://docs.docker.com/compose/)
 - [httpx](https://www.python-httpx.org/) – Cliente HTTP asíncrono
-- [pytest](https://docs.pytest.org/) – Framework de testing
 - [dotenv](https://pypi.org/project/python-dotenv/) – Carga de variables de entorno
 
 ---
 
-## Entorno
+## 🧰 Requisitos previos
+
+- Tener Docker y Docker Compose instalados (recomendado: Docker Desktop).
+- En Windows, usar Git Bash o WSL si se desea trabajar con `make`.
+- Tener un archivo `.env` con las siguientes claves:
+
+```env
+TWITCH_CLIENT_ID=tu_client_id
+TWITCH_CLIENT_SECRET=tu_client_secret
+
+## Ejecución de la aplicación
 
 - Crear un .env con las variables TWITCH_CLIENT_ID y TWITCH_CLIENT_SECRET para acceder a la API externa de Twitch
+- En terminal de Linux de Windows o terminal de sistema Linux/Mac con make instalado (sudo apt update && sudo apt install make). En la raíz del proyecto, ejecutar make dcup, en caso de no tener make, ejecutar docker compose up -d
+- Una vez se hace la build del contenedor (solo la primera vez) y se levanta, acceder en el navegador a localhost:8000/docs para acceder a la documentación de la API
+- Probar los endpoints.
 
 ## ⚙️ Endpoints
 
@@ -25,12 +37,11 @@ Esta aplicación permite consultar datos de usuarios y streams en vivo desde la 
 
 - Devuelve la información de un usuario de Twitch por su ID.
 - Requiere el parámetro `id`.
-- Gestiona expiración de tokens y errores comunes.
+- Ids de ejemplo: SirMaza -> 39518378 y AuronPlay -> 459331509
 
 ### `/analytics/streams`
 
 - Devuelve una lista de streams actualmente en vivo.
-- Utiliza el token OAuth automáticamente.
 
 
 ## 📌 Decisiones técnicas
@@ -38,3 +49,13 @@ Esta aplicación permite consultar datos de usuarios y streams en vivo desde la 
 - Elijo Python como lenguaje para explorar nuevos lenguajes de desarrollo y por su capacidad para poder ser montado en docker fácilmente.
 - Se elige FastAPI por su claridad, rendimiento y facilidad para montar una API REST rápidamente.
 - Uso de httpx para llamadas a API externa.
+
+## 🧠 Proceso de desarrollo
+
+1º Lectura de requerimientos y selección del lenguaje y tecnologías a utilizar
+2º Montaje del esqueleto del proyecto y arquitectura Docker
+3º Lectura de la documentación de la API de twitch para saber sus estructuras de respuesta y peticiones
+4º Desarrollo de la petición para obtener el token de twitch para posteriores peticiones
+5º Desarrollo del endpoint para recoger datos de un usuario de twitch por id con manejo de errores
+6º Desarrollo del endpoint para recoger datos de los directos en ese momento con manejo de errores
+7º Desarrollo del regenerar token en el caso de que la perimera vez sea inválido y refactorización del código

@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 import httpx
 from fastapi import HTTPException
+from app.models.responses import raise_http_error
 
 load_dotenv()
 
@@ -36,7 +37,23 @@ async def get_token():
 async def get_user_info(id):
     token = await get_token()
     print(token)
-    return None
+
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Client-Id": CLIENT_ID
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(f"{BASE_URL}/users", params={"id": id}, headers=headers)
+
+    if response.status_code == 401:
+        raise_http_error(401, "Unauthorized. Twitch access token is invalid or has expired.")
+    elif response.status_code == 404:
+        raise_http_error(404, "User not found")
+    elif response.status_code == 500:
+        raise_http_error(500, "Internal server error")  
+
+    return response.json().get("data", [])[0]
 
 async def get_live_streams():
     return None
